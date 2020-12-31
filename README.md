@@ -1,2 +1,2 @@
-# MDS6106-Optimization
+# Optimization
 ML models and optimization methods
