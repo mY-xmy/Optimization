@@ -186,9 +186,10 @@ def AGM(obj, grad, x_init, **kwargs):
                 tol: default = 1e-4
                 max_iter: default = 5000
                 print: default = True
-                alpha: 1
-                eta: 0.5
+                alpha: default = 1
+                eta: default = 0.5
         Output:
+            results: Logger that records all results
     """
     # parameter initialize
     class AGM_Option(Option):
