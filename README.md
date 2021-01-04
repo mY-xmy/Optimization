@@ -53,6 +53,8 @@ ML models and optimization methods
 > class Logger(stochastic=False)
 
 Data logger that records all numerical information during the optimization
+**Note**: All functions in Optim returns a Logger that records all results. 
+
 #### Attributes
 - **method**: optimizer name
 - **trace_norm**: list that records norm of gradient at each x
