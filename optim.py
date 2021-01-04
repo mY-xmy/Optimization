@@ -262,9 +262,9 @@ class Adam:
         if self.print:
             print("----- Adam Method -----")
         
-    def update(self, model, grad, minibatch_features, minibatch_labels):
+    def update(self, model, minibatch_features, minibatch_labels):
         x = np.concatenate(model.parameters)
-        gradient = grad(x, minibatch_features, minibatch_labels) / minibatch_features.shape[0]
+        gradient = model.grad(x, minibatch_features, minibatch_labels) / minibatch_features.shape[0]
         self.t += 1
         self.s = self.beta1 * self.s + (1 - self.beta1) * gradient
         self.r = self.beta2 * self.r + (1 - self.beta2) * gradient * gradient 
@@ -304,9 +304,9 @@ class SGD:
     def lr(self):
         return 1 / (1 + self.decay * self.t) if 1 / (1 + self.decay * self.t) > 0.01 * self.eta else 0.01 * self.eta
 
-    def update(self, model, grad, minibatch_features, minibatch_labels):
+    def update(self, model, minibatch_features, minibatch_labels):
         x = np.concatenate(model.parameters)
-        gradient = grad(x, minibatch_features, minibatch_labels) / minibatch_features.shape[0]
+        gradient = model.grad(x, minibatch_features, minibatch_labels) / minibatch_features.shape[0]
         self.t += 1
         self.v = self.momemtum * self.v - self.lr * gradient
         x = x + self.v

@@ -70,7 +70,7 @@ class model:
                 for j in range(batch_num):
                     X_batch = shuffle_X[batch_size * j: min(batch_size * (j+1), features.shape[0])]
                     y_batch = shuffle_y[batch_size * j: min(batch_size * (j+1), features.shape[0])]
-                    optimizer.update(self, self.grad, X_batch, y_batch)
+                    optimizer.update(self, X_batch, y_batch)
                 if optimizer.print:
                     print("Epoch:{:d}  \t  opt:{:.4f}  \t  glob.grad:{:.6f}".format(i+1, 
                         obj(np.concatenate(self.parameters)), norm(grad(np.concatenate(self.parameters)), ord = 2)))
@@ -131,7 +131,7 @@ class model:
                 for j in range(batch_num):
                     X_batch = shuffle_X[batch_size * j: min(batch_size * (j+1), features.shape[0])]
                     y_batch = shuffle_y[batch_size * j: min(batch_size * (j+1), features.shape[0])]
-                    optimizer.update(self, self.grad, X_batch, y_batch)
+                    optimizer.update(self, X_batch, y_batch)
                 if optimizer.print:
                     print("Epoch:{:d}  \t  opt:{:.4f}  \t  glob.grad:{:.6f}".format(i+1, 
                         obj(np.concatenate(self.parameters)), norm(grad(np.concatenate(self.parameters)), ord = 2)))
@@ -198,16 +198,16 @@ class SVM_Huber(SVM):
         SVM without kernel
         using Huber norm to approximate Hinge Loss
         Parameters:
-            c:
-            delta:
-            max_iter:
-            tol:
+            c: default = 1e-1
+            delta: default = 1e-1
+            max_iter: default = 1000
+            tol: default = 1e-4
         Method:
             obj(x,features,labels)
             grad(x,features,labels)
-            fit(features,labels,)
-            partial_fit:
-            predict:
+            fit(features,labels,opt_method)
+            partial_fit(features,labels,opt_method)
+            predict(features)
     """
     def __init__(self, c = 1e-1, delta = 1e-1, max_iter=1000, tol = 1e-4):
         super().__init__(c = c, max_iter = max_iter, tol = tol)
@@ -249,7 +249,20 @@ class SVM_Huber(SVM):
         return self.grad_norm(x)+ self.grad_huber(x,features,labels)
 
 class LogisticRegression(model):
-    def __init__(self, c, max_iter=1000, tol = 1e-1):
+    """
+        Logistic Regression
+        Parameters:
+            c: default = 1e-1
+            max_iter: default = 1000
+            tol: default = 1e-4
+        Method:
+            obj(x,features,labels)
+            grad(x,features,labels)
+            fit(features,labels,opt_method)
+            partial_fit(features,labels,opt_method)
+            predict(features,threshold=0.5)
+    """
+    def __init__(self, c=0.1, max_iter=1000, tol = 1e-1):
         self.c = c
         self.max_iter = max_iter
         self.tol = tol
