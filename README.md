@@ -5,6 +5,12 @@ ML models and optimization methods
 ### SVM
 > class model.SVM_Huber(c=0.1, delta=0.1, max_iter=1000, tol=1e-4)
 
+#### Parameters
+- **c**: regularization parameter, default = 1e-1
+- **delta**: Huber norm parameter, default = 1e-1
+- **max_iter**: max iteration, default = 1000
+- **tol**: tolerance, default = 1e-4
+
 #### Attributes
 - **weight**: ndarray of shape (n_features,)
 - **bias**: ndarray of shape (1,)
@@ -21,6 +27,11 @@ ML models and optimization methods
 
 ### Logistic Regression
 > class model.LogisticRegression(c=0.1, max_iter=1000, tol=1e-4)
+
+#### Parameters
+- **c**: regularization parameter, default = 1e-1
+- **max_iter**: max iteration, default = 1000
+- **tol**: tolerance, default = 1e-4
 
 #### Attributes
 - **weight**: ndarray of shape (n_features,)
@@ -128,7 +139,7 @@ Data logger that records all numerical information during the optimization
 - print: default = True
 
 #### Attributes
-- lr: linear decaying learning rate with lower bound = 0.01 * eta
+- **lr**: linear decaying learning rate with lower bound = 0.01 * eta
 
 $$lr = max(\frac{1}{1 + decay * t},0.01 * \eta)$$
 
