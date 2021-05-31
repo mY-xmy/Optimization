@@ -7,7 +7,8 @@ ML models and optimization methods
 
 #### Parameters
 - **c**: regularization parameter, default = 1e-1
-- **delta**: Huber norm parameter, default = 1e-1
+- **delta**: Huber parameter, default = 1e-1
+- **loss**: loss function. optional: "hinge", "squared_hinge", "huber_hinge". **default**: "squared_hinge"
 - **max_iter**: max iteration, default = 1000
 - **tol**: tolerance, default = 1e-4
 
@@ -22,7 +23,6 @@ ML models and optimization methods
 - **parameters**(*new_parameters): return (weight, bias) or modify the attributes
 - **fit**(features,labels,opt_method, **kwargs): train model with given data and optimization method
   - kwargs: parameters for optimization methods, epoch and batch_size for stochastic methods.
-- **partial_fit**(features,labels,opt_method)
 - **predict**(features): return predicted labels with given features
 
 ### Logistic Regression
@@ -43,7 +43,6 @@ ML models and optimization methods
 - **grad**(x,features,labels): gradient function of LR
 - **parameters**(*new_parameters): return (weight, bias) or modify the attributes
 - **fit**(features,labels,opt_method): train model with given data and optimization method
-- **partial_fit**(features,labels,opt_method)
 - **predict**(features,threshold): return predicted labels with given features
 
 
@@ -150,4 +149,7 @@ $$lr = max(\frac{1}{1 + decay * t},0.01 * \eta)$$
 
 
 ## 3. Metrics
-To be added...
+### Accuracy
+### Precision
+### Recall
+### F1
