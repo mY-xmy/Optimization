@@ -15,6 +15,7 @@ class Logger:
 
         self.method = None
         self.trace_norm = []
+        self.trace_x = []
         self.x_init = None
         self.minima = None
         if stochastic:
